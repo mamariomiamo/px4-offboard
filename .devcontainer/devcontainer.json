@@ -1,0 +1,24 @@
+{
+    "image": "px4_ros2_humble:latest",
+    "remoteUser": "developer",
+    "privileged": true,
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/developer/px4_offboard_ws/src,type=bind,consistency=cached",
+    "workspaceFolder": "/home/developer/px4_offboard_ws/src",
+    "containerEnv": {
+        "DISPLAY": "${localEnv:DISPLAY}"
+    },
+    "mounts": [
+        {
+            "source": "${localEnv:HOME}/.gitconfig",
+            "target": "/home/$USER/.gitconfig",
+            "type": "bind"
+        }
+    ],
+    "runArgs": [
+        "--cap-add=SYS_PTRACE",
+        "--security-opt",
+        "seccomp=unconfined",
+        "--network=host",
+        "--volume=/home/${localEnv:USER}/.Xauthority:/root/.Xauthority:rw"
+    ]
+}
